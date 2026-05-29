@@ -383,6 +383,9 @@ int ossl_ed448_sign(OSSL_LIB_CTX *ctx, uint8_t *out_sig,
     const uint8_t *context, size_t context_len,
     const uint8_t phflag, const char *propq)
 {
+    if (context_len) > UINT8_MAX)
+        return C448_FAILURE;
+    
     return ossl_c448_ed448_sign(ctx, out_sig, private_key, public_key, message,
                message_len, phflag, context, context_len,
                propq)
